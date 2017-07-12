@@ -6,5 +6,4 @@ class Bucket(object):
         self.description = description
         self.bucketitems = []
 
-    def create_bucketitems(self, bucketitem):
-        self.bucketitems.append(bucketitem)
+    
