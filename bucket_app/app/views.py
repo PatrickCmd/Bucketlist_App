@@ -8,6 +8,9 @@ from classes.bucketapp import BucketApp
 # creating bucketapp object
 bucketapp = BucketApp()
 
+#global user object 
+current_user  = None
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -25,10 +28,12 @@ def login():
     email = request.form['email']
     password = request.form['password']
     # creating object for logged in user
-    login_user = User(email, password)
-    session['email'] = bucketapp.login(login_user)
+    global current_user 
+    current_user = User(email, password)
+    session['email'] = bucketapp.login(current_user)
     print(session['email'])
-    return redirect(url_for('bucketlist')) # redirect to users bucketlist page
+    # redirect to users bucketlist page
+    return redirect(url_for('bucketlist')) 
 
 @app.route('/logout')
 def logout():
@@ -51,10 +56,12 @@ def create():
     password  = request.form['password']
 
     # creating the user account from the user object
-    user = User(firstname, lastname, username, email, password)
+    global current_user
+    current_user = User(firstname, lastname, username, email, password)
+    
     # Append user object to a list of already created users
-    bucketapp.registerUser(user)
-    print(user)
+    bucketapp.registerUser(current_user)
+    print(current_user)
     return redirect(url_for('login'))
     
 @app.route('/bucketlist')
