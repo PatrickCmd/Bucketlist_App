@@ -12,7 +12,8 @@ class BucketApp(object):
     def login(self, loggedin_user):
         '''Checks if loggedin_user exits and login into their account'''
         for user in self.users_created:
+            print(user.email)
             if user.email == loggedin_user.email and user.password == loggedin_user.password:
                 print(user)
-                return user.email   # return user's email
-            return False
+                return user   # return user's email
+            # return False

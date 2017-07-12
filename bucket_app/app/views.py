@@ -30,10 +30,12 @@ def login():
     # creating object for logged in user
     global current_user 
     current_user = User(email, password)
-    session['email'] = bucketapp.login(current_user)
-    print(session['email'])
+    # session['email'] = bucketapp.login(current_user)
+    user = bucketapp.login(current_user)
+    print(user)
     # redirect to users bucketlist page
-    return redirect(url_for('bucketlist')) 
+    # return redirect(url_for('bucketlist')) 
+    return render_template('bucketlists.html', user=user)
 
 @app.route('/logout')
 def logout():
@@ -57,7 +59,7 @@ def create():
 
     # creating the user account from the user object
     global current_user
-    current_user = User(firstname, lastname, username, email, password)
+    current_user = User(email, password, firstname, lastname, username)
     
     # Append user object to a list of already created users
     bucketapp.registerUser(current_user)
