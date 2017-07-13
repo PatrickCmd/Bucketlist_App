@@ -17,5 +17,5 @@ class BucketApp(object):
             print(user.firstname)
             if user.email == loggedin_user.email and user.password == loggedin_user.password:
                 print(user)
-                return user   # return user's email
-            # return False
+                return user
+            
