@@ -6,8 +6,26 @@ with ease. This one also lets you add goals to the bucket list in a simple way b
 name, due date, description, set privacy, a goal category, and also insert photos. You can explore the ideas
 according to the major goal categories like Travel, Hiking, Sports, Entertainment, etc.
 
-INSTALLING DEPENDENCIES
-  pip install -r bucket_app/requirements.txt
+## Requirements
 
-RUNNING THE APPLICATION
-  python bucket_app/run.py
+'Python 3.4+, python-pip, virtualenv, Flask'
+
+## Installation
+
+First, clone this repository.
+
+'$ git clone https://github.com/PatrickCmd/Bucketlist_App
+$ cd Bucketlist_App'
+Create a virtualenv, and activate this:
+
+'$ virtualenv env 
+$ source env/bin/activate'
+After, install all necessary to run:
+
+'$ pip install -r bucket_app/requirements.txt'
+Than, run the application:
+
+'$ python bucket/run.py'
+To see your application, access this url in your browser:
+
+'http://localhost:5000'
