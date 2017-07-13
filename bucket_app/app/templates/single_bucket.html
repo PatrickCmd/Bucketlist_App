@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <p style="padding: 20px;"></p>
+                <h2>Travel
+                    <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#goal"><i class="fa fa-plus"></i> ADD ITEM/GOAL</button>
+                </h2>
+                <hr>
+                <div>
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#active" aria-controls="active" role="tab" data-toggle="tab">Active/Achievements</a></li>
+                    <li role="presentation"><a href="#completed" aria-controls="completed" role="tab" data-toggle="tab">Completed</a></li>
+
+                  </ul>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="activee">
+
+                        <div class="col-md-12">
+                            <p style="padding: 10px;"></p>
+                                <!-- ========Accordions======= -->
+                            <div class="panel-group" id="accordion" role="role" aria-multiselectable="true">
+                              <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                  <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                      Travel to Paris
+                                    </a>
+                                    <a href="#" class="pull-right">
+                                        <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i> Delete
+                                     </a>
+                                  </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                  <div class="panel-body">
+                                    I would like to travel to paris before 2017
+                                    <div class="">
+                                        <button type="button" class="btn btn-success btn-sm">
+                                          <i class="fa fa-edit fa-fw" aria-hidden="true"></i> Edit
+                                        </button>
+                                        <button type="button" class="btn btn-info btn-sm">
+                                          <i class="fa fa-check fa-fw" aria-hidden="true"></i> Mark as Done
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-sm">
+                                          <i class="fa fa-share fa-fw" aria-hidden="true"></i> Share
+                                        </button>
+                                     </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                  <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                      Visit to Mecca
+                                    </a>
+                                  </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                  <div class="panel-body">
+                                    I have to pay prigrimage to Mecca by December
+                                    <div class="">
+                                        <button type="button" class="btn btn-success btn-sm">
+                                          <i class="fa fa-edit fa-fw" aria-hidden="true"></i> Edit
+                                        </button>
+                                        <button type="button" class="btn btn-info btn-sm">
+                                          <i class="fa fa-check fa-fw" aria-hidden="true"></i> Mark as Done
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-sm">
+                                          <i class="fa fa-share fa-fw" aria-hidden="true"></i> Share
+                                        </button>
+                                     </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="completed">
+
+                    </div>
+
+                  </div>
+
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+{% endblock %}
