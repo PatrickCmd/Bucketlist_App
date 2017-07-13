@@ -18,9 +18,9 @@
                             <ul class="list-group">
                                 {% for bucket in user.buckets %}
                                     <li class="list-group-item">
-                                        <a href="/bucket/<{{ bucket.name }}>">{{ bucket.name }}</a>
-                                        <a href="#" class="pull-right"><i class="fa fa-trash-o"></i> Delete</a>
-                                        <a href="#" class="pull-right"><i class="fa fa-pencil-square"></i> Edit&nbsp;&nbsp;|&nbsp;&nbsp;</a>
+                                        <a href="#{{ bucket.name }}" data-toggle="modal">{{ bucket.name }}</a>
+                                        <a href="#del-{{ bucket.name }}" data-toggle="modal" class="pull-right"><i class="fa fa-trash-o"></i> Delete</a>
+                                        <a href="#{{ bucket.name }}" data-toggle="modal" class="pull-right"><i class="fa fa-pencil-square"></i> Edit&nbsp;&nbsp;|&nbsp;&nbsp;</a>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -39,7 +39,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">ADD ITEM</h4>
+            <h4 class="modal-title">ADD BUCKET</h4>
           </div>
           <form action="{{ url_for('create_bucket') }}" method="post" class="form-horizontal" id="buckets">
               <div class="modal-body">
@@ -65,6 +65,81 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <!-- Edit Buckets Modals -->
+    {% if user.buckets %}
+        {% for bucket in user.buckets %}
+
+            <div class="modal fade" tabindex="-1" role="dialog"  id="{{ bucket.name }}" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">EDIT BUCKET</h4>
+                    </div>
+                    <form action="{{ url_for('edit_bucket') }}" method="post" class="form-horizontal" id="buckets">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="new_name" class="col-sm-2 control-label">Bucket</label>
+                                <div class="col-sm-10">
+                                <input type="hidden" class="form-control" name="name" id="name" value="{{ bucket.name }}">
+                                <input type="text" class="form-control" name="new_name" id="new_name" value="{{ bucket.name }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-10">
+                                <textarea id="description" name="description" class="form-control">{{ bucket.description }}</textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary"  value="EDIT">
+                        </div>
+                    </form>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+        {% endfor %}
+    {% endif %}
+   <!-- End edit modals -->
+
+   <!-- Delete Buckets Modals -->
+    {% if user.buckets %}
+        {% for bucket in user.buckets %}
+
+            <div class="modal fade" tabindex="-1" role="dialog"  id="del-{{ bucket.name }}" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">DELETE BUCKET(ARE YOU SURE YOU WANT TO DELETE BUCKET?)</h4>
+                    </div>
+                    <form action="{{ url_for('delete_bucket') }}" method="post" class="form-horizontal" id="buckets">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="new_name" class="col-sm-2 control-label">Bucket</label>
+                                <div class="col-sm-10">
+                                <input type="hidden" class="form-control" name="name" id="name" value="{{ bucket.name }}">
+                                <!--<input type="text" class="form-control" name="new_name" id="new_name" value="{{ bucket.name }}">-->
+                                </div>
+                            </div>                            
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-danger"  value="CONFIRM">
+                        </div>
+                    </form>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+        {% endfor %}
+    {% endif %} 
 
 
 
