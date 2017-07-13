@@ -31,7 +31,9 @@ $ pip install -r bucket_app/requirements.txt
 ```
 Than, run the application:
 
-`$ python bucket/run.py`
+```
+$ python bucket/run.py
+```
 To see your application, access this url in your browser:
 
 `http://localhost:5000`
