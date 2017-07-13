@@ -18,7 +18,7 @@
                             <ul class="list-group">
                                 {% for bucket in user.buckets %}
                                     <li class="list-group-item">
-                                        {{ bucket.name }}
+                                        <a href="/bucket/<{{ bucket.name }}>">{{ bucket.name }}</a>
                                         <a href="#" class="pull-right"><i class="fa fa-trash-o"></i> Delete</a>
                                         <a href="#" class="pull-right"><i class="fa fa-pencil-square"></i> Edit&nbsp;&nbsp;|&nbsp;&nbsp;</a>
                                     </li>
@@ -41,18 +41,18 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">ADD ITEM</h4>
           </div>
-          <form action="" method="post" class="form-horizontal" id="buckets">
+          <form action="{{ url_for('create_bucket') }}" method="post" class="form-horizontal" id="buckets">
               <div class="modal-body">
                 <div class="form-group">
-                    <label for="bucket" class="col-sm-2 control-label">Bucket</label>
+                    <label for="name" class="col-sm-2 control-label">Bucket</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" name="bucket" id="bucket" placeholder="Bucket Title">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Bucket Title">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="description" class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
-                    <textarea id="description" class="form-control"></textarea>
+                    <textarea id="description" name="description" class="form-control"></textarea>
                     </div>
                 </div>
 
