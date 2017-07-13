@@ -1,15 +1,17 @@
-from flask import Flask, request, redirect, render_template, url_for, session
+from flask import Flask, request, redirect, render_template, url_for, session, flash
 from app import app
 
 # importing class objects
 from classes.user import User
 from classes.bucketapp import BucketApp
+from classes.bucketlist import Bucket
 
 # creating bucketapp object
 bucketapp = BucketApp()
 
-#global user object 
+#global user objects
 current_user  = None
+user_bucket   = None
 
 @app.route('/')
 @app.route('/index')
@@ -65,6 +67,7 @@ def create():
     # Append user object to a list of already created users
     bucketapp.registerUser(current_user)
     print(current_user)
+    flash("You have successfully created your account please proceed to login")
     return redirect(url_for('login'))
     
 @app.route('/bucketlist')
@@ -73,3 +76,19 @@ def bucketlist():
     # if 'email' not in session:
     #     return redirect(url_for('index'))
     return render_template('bucketlists.html', title='Bucketlists', user=current_user)
+
+@app.route('/create_bucket', methods=['POST'])
+def create_bucket():
+    '''view to create user buckets'''
+    bucket_name = request.form['name']
+    description = request.form['description']
+    print(request.form)
+    # creating bucket object for the current user
+    global user_bucket
+    user_bucket = Bucket(bucket_name, description)
+    print(user_bucket)
+    # adding bucket to user's bucketlist
+    global current_user
+    current_user.create_user_bucketlist(user_bucket)
+    # return render_template('bucketlists.html', title='Bucketlists', user=current_user)
+    return redirect(url_for('bucketlist'))
