@@ -14,15 +14,21 @@ according to the major goal categories like Travel, Hiking, Sports, Entertainmen
 
 First, clone this repository.
 
-`$ git clone https://github.com/PatrickCmd/Bucketlist_App`
-`$ cd Bucketlist_App`
+```
+$ git clone https://github.com/PatrickCmd/Bucketlist_App`
+$ cd Bucketlist_App
+```
 Create a virtualenv, and activate this:
 
-`$ virtualenv env` 
-`$ source env/bin/activate`
+```
+$ virtualenv env
+$ source env/bin/activate
+```
 After, install all necessary to run:
 
-'$ pip install -r bucket_app/requirements.txt`
+```
+$ pip install -r bucket_app/requirements.txt
+```
 Than, run the application:
 
 `$ python bucket/run.py`
