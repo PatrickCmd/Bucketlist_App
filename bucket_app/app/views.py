@@ -31,11 +31,12 @@ def login():
     global current_user 
     current_user = User(email, password)
     # session['email'] = bucketapp.login(current_user)
-    user = bucketapp.login(current_user)
-    print(user)
+    current_user = bucketapp.login(current_user)
+    print(current_user)
     # redirect to users bucketlist page
     # return redirect(url_for('bucketlist')) 
-    return render_template('bucketlists.html', user=user)
+    # return render_template('bucketlists.html', user=user)
+    return redirect(url_for('bucketlist'))
 
 @app.route('/logout')
 def logout():
@@ -69,6 +70,6 @@ def create():
 @app.route('/bucketlist')
 def bucketlist():
     '''users bucketlist template page'''
-    if 'email' not in session:
-        return redirect(url_for('index'))
-    return render_template('bucketlists.html', title='Bucketlists')
+    # if 'email' not in session:
+    #     return redirect(url_for('index'))
+    return render_template('bucketlists.html', title='Bucketlists', user=current_user)
