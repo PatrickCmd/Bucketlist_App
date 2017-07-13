@@ -49,14 +49,14 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              {% if 'email' in session %}
-                <a href="{{ url_for('create') }}"><i class="fa fa-user"></i> Hi {{ session['email'] }}</a>
+              {% if user %}
+                <a href="{{ url_for('create') }}"><i class="fa fa-user"></i> Hi {{ user.email }}</a>
               {% else %}  
                 <a href="{{ url_for('create') }}"><i class="fa fa-user-plus"></i> CREATE ACCOUNT</a>
               {% endif %}
               
             </li>
-            {% if 'email' in session %}
+            {% if user %}
               <li><a href="{{ url_for('logout') }}"><i class="fa fa-sign-out"></i> LOGOUT</a></li>
             {% else %}
               <li><a href="{{ url_for('login') }}"><i class="fa fa-sign-in"></i> SIGN IN</a></li>  
