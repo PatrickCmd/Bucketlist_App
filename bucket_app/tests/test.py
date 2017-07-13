@@ -25,7 +25,9 @@ class CrudTests(unittest.TestCase):
         self.assertIsInstance(self.bucketapp.users_created, list)
     
     def test_bucket_is_created(self):
-        self.assertIsInstance(self.user.buckets, list)
+        self.assertEqual(len(self.user.buckets) , 0)
+        self.user.create_user_bucketlist(self.bucket)
+        self.assertEqual(len(self.user.buckets), 1)
     
     def test_bucketlist_item_is_created(self):
         self.assertIsInstance(self.bucket.bucketitems, list)
