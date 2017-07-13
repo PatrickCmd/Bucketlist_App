@@ -12,23 +12,60 @@
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                Travel
-                                <a href="#" class="pull-right"><i class="fa fa-trash-o"></i> Delete</a>
-                                <a href="#" class="pull-right"><i class="fa fa-pencil-square"></i> Edit&nbsp;&nbsp;|&nbsp;&nbsp;</a>
-                            </li>
-                            <li class="list-group-item">
-                                Hiking
-                                <a href="#" class="pull-right"><i class="fa fa-trash-o"></i> Delete</a>
-                                <a href="#" class="pull-right"><i class="fa fa-pencil-square"></i> Edit&nbsp;&nbsp;|&nbsp;&nbsp;</a>
-                            </li>
-                        </ul>
+                        {% if user.buckets|length == 0 %}
+                            <div class="alert alert-warning">No Buckets yet</div>
+                        {% else %}    
+                            <ul class="list-group">
+                                {% for bucket in user.buckets %}
+                                    <li class="list-group-item">
+                                        {{ bucket.name }}
+                                        <a href="#" class="pull-right"><i class="fa fa-trash-o"></i> Delete</a>
+                                        <a href="#" class="pull-right"><i class="fa fa-pencil-square"></i> Edit&nbsp;&nbsp;|&nbsp;&nbsp;</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
 
         <hr>
+
+
+    <!-- Add bucket Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog"  id="bucket" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">ADD ITEM</h4>
+          </div>
+          <form action="" method="post" class="form-horizontal" id="buckets">
+              <div class="modal-body">
+                <div class="form-group">
+                    <label for="bucket" class="col-sm-2 control-label">Bucket</label>
+                    <div class="col-sm-10">
+                    <input type="text" class="form-control" name="bucket" id="bucket" placeholder="Bucket Title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                    <textarea id="description" class="form-control"></textarea>
+                    </div>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary"  value="Save">
+              </div>
+          </form>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
 
 {% endblock %}
