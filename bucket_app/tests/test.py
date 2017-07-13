@@ -19,7 +19,7 @@ class CrudTests(unittest.TestCase):
         self.bucketapp = BucketApp()
         self.user = User('pat@gmail.com', 'pat123')
         self.bucket = Bucket()
-        self.bucketitem = BucketItem()
+        self.bucketitem = BucketItem('Travel to paris', 'I want to visit paris')
 
     # crud operation tests    
     def test_user_is_created_successfully(self):
@@ -31,12 +31,12 @@ class CrudTests(unittest.TestCase):
         self.user.create_user_bucketlist(self.bucket)
         self.assertEqual(len(self.user.buckets), 1)
 
-    ''''def test_bucketitem_is_created(self):
+    def test_bucketitem_is_created(self):
         self.assertEqual(len(self.bucket.bucketitems), 0)
         self.user.create_bucketlist_item(self.bucket.name, self.bucketitem)
         self.user.create_bucketlist_item(self.bucket.name, self.bucketitem)
         self.user.create_bucketlist_item(self.bucket.name, self.bucketitem)
-        self.assertEqual(len(self.bucket.bucketitems), 3)'''
+        self.assertEqual(len(self.bucket.bucketitems), 3)
 
     def test_bucket_is_deleted(self):
         self.assertEqual(len(self.user.buckets) , 0)
