@@ -5,6 +5,13 @@
         <div class="col-md-6 col-md-offset-2">
             <p style="padding: 20px;"></p>
             <div class="well">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}                        
+                        {% for message in messages %}
+                            <div class="alert alert-success">{{ message }} </div>
+                        {% endfor %}                        
+                    {% endif %}
+                {% endwith %}
                 <fieldset>
                     <form action="{{ url_for('login') }}" method="post" class="form-horizontal">
                         <legend>Login into your account</legend>
