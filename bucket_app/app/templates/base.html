@@ -50,7 +50,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
               {% if user %}
-                <a href="{{ url_for('create') }}"><i class="fa fa-user"></i> Hi {{ user.email }}</a>
+                <a href="{{ url_for('create') }}"><i class="fa fa-user"></i> Hi {{ user.firstname }}-{{ user.lastname }}</a>
               {% else %}  
                 <a href="{{ url_for('create') }}"><i class="fa fa-user-plus"></i> CREATE ACCOUNT</a>
               {% endif %}
