@@ -14,17 +14,20 @@ class User(object):
     def create_user_bucketlist(self, bucketlist):
         self.buckets.append(bucketlist)
     
-    def view_user_bucketlist(self, user_id):
+    def view_user_bucketlist(self, user):
         pass
     
     def edit_user_bucketlist(self, user_id):
         pass
     
-    def delete_user_bucketlist(self, user_id):
-        pass
+    def delete_user_bucketlist(self, bucketlist):
+        self.buckets.remove(bucketlist)
     
-    def create_bucketlist_item(self, bucketname):
-        pass
+    def create_bucketlist_item(self, bucketname, bucketitem):
+        '''creates bucketlist items for the user buckets'''
+        for bucket in self.buckets:
+            if bucket.name == bucketname:
+                bucket.bucketitems.append[bucketitem]
     
     def edit_bucketlist_item(self, bucketname):
         pass
