@@ -8,24 +8,24 @@ according to the major goal categories like Travel, Hiking, Sports, Entertainmen
 
 ## Requirements
 
-'Python 3.4+, python-pip, virtualenv, Flask'
+`Python 3.4+, python-pip, virtualenv, Flask`
 
 ## Installation
 
 First, clone this repository.
 
-'$ git clone https://github.com/PatrickCmd/Bucketlist_App
-$ cd Bucketlist_App'
+`$ git clone https://github.com/PatrickCmd/Bucketlist_App`
+`$ cd Bucketlist_App`
 Create a virtualenv, and activate this:
 
-'$ virtualenv env 
-$ source env/bin/activate'
+`$ virtualenv env` 
+`$ source env/bin/activate`
 After, install all necessary to run:
 
-'$ pip install -r bucket_app/requirements.txt'
+'$ pip install -r bucket_app/requirements.txt`
 Than, run the application:
 
-'$ python bucket/run.py'
+`$ python bucket/run.py`
 To see your application, access this url in your browser:
 
-'http://localhost:5000'
+`http://localhost:5000`
