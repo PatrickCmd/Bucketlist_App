@@ -32,12 +32,7 @@ def login():
     # creating object for logged in user
     global current_user 
     current_user = User(email, password)
-    # session['email'] = bucketapp.login(current_user)
     current_user = bucketapp.login(current_user)
-    print(current_user)
-    # redirect to users bucketlist page
-    # return redirect(url_for('bucketlist')) 
-    # return render_template('bucketlists.html', user=user)
     return redirect(url_for('bucketlist'))
 
 @app.route('/logout')
@@ -53,7 +48,6 @@ def create():
         return render_template('register.html', title='Register')
 
     # getting form variables
-    print(request.form)
     firstname = request.form['firstname']
     lastname  = request.form['lastname']
     username  = request.form['username']
@@ -73,8 +67,6 @@ def create():
 @app.route('/bucketlist')
 def bucketlist():
     '''users bucketlist template page'''
-    # if 'email' not in session:
-    #     return redirect(url_for('index'))
     return render_template('bucketlists.html', title='Bucketlists', user=current_user)
 
 @app.route('/create_bucket', methods=['POST'])
@@ -90,5 +82,4 @@ def create_bucket():
     # adding bucket to user's bucketlist
     global current_user
     current_user.create_user_bucketlist(user_bucket)
-    # return render_template('bucketlists.html', title='Bucketlists', user=current_user)
     return redirect(url_for('bucketlist'))
