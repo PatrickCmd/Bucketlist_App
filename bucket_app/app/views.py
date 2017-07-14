@@ -5,6 +5,7 @@ from app import app
 from classes.user import User
 from classes.bucketapp import BucketApp
 from classes.bucketlist import Bucket
+from classes.bucketitem import BucketItem
 
 # creating bucketapp object
 bucketapp = BucketApp()
@@ -12,6 +13,7 @@ bucketapp = BucketApp()
 #global user objects
 current_user  = None
 user_bucket   = None
+bucket_item   = None
 
 @app.route('/')
 @app.route('/index')
@@ -32,12 +34,11 @@ def login():
     # creating object for logged in user
     global current_user 
     current_user = User(email, password)
-    # session['email'] = bucketapp.login(current_user)
-    current_user = bucketapp.login(current_user)
-    print(current_user)
-    # redirect to users bucketlist page
-    # return redirect(url_for('bucketlist')) 
-    # return render_template('bucketlists.html', user=user)
+    # checking if user has provided correct crendentials
+    if not bucketapp.login(current_user):
+        flash('Wrong password or email. If you do have account, please create account!')
+        return redirect(url_for('login'))
+    current_user = bucketapp.login(current_user)    
     return redirect(url_for('bucketlist'))
 
 @app.route('/logout')
@@ -71,9 +72,7 @@ def create():
     
 @app.route('/bucketlist')
 def bucketlist():
-    '''users bucketlist template page'''
-    # if 'email' not in session:
-    #     return redirect(url_for('index'))
+    '''users bucketlist template page'''    
     return render_template('bucketlists.html', title='Bucketlists', user=current_user)
 
 @app.route('/create_bucket', methods=['POST'])
@@ -88,8 +87,7 @@ def create_bucket():
     print(user_bucket)
     # adding bucket to user's bucketlist
     global current_user
-    current_user.create_user_bucketlist(user_bucket)
-    # return render_template('bucketlists.html', title='Bucketlists', user=current_user)
+    current_user.create_user_bucketlist(user_bucket)    
     return redirect(url_for('bucketlist'))
 
 @app.route('/edit_bucket', methods=['POST'])
@@ -97,16 +95,9 @@ def edit_bucket():
     '''view to create user buckets'''
     bucket_name = request.form['name']
     new_bucket_name = request.form['new_name']
-    description = request.form['description']
-    print(request.form)
-    # creating bucket object for the current user
-    # global user_bucket
-    # user_bucket = Bucket(bucket_name, description)
-    #print(user_bucket)
-    # adding bucket to user's bucketlist
+    description = request.form['description']    
     # global current_user
-    current_user.edit_user_bucketlist(bucket_name, new_bucket_name, description)
-    # return render_template('bucketlists.html', title='Bucketlists', user=current_user)
+    current_user.edit_user_bucketlist(bucket_name, new_bucket_name, description)    
     return redirect(url_for('bucketlist'))
 
 @app.route('/delete_bucket', methods=['POST'])
@@ -114,16 +105,28 @@ def delete_bucket():
     '''view to create user buckets'''
     bucket_name = request.form['name']
     print(request.form)
-    # creating bucket object for the current user
-    # global user_bucket
-    # user_bucket = Bucket(bucket_name, description)
-    #print(user_bucket)
-    # adding bucket to user's bucketlist
     # global current_user
-    current_user.delete_user_bucketlist(bucket_name)
-    # return render_template('bucketlists.html', title='Bucketlists', user=current_user)
+    current_user.delete_user_bucketlist(bucket_name)    
     return redirect(url_for('bucketlist'))
 
-@app.route('/bucket/<bucketname>')
-def bucket_details(bucketname):
-    return render_template('single_bucket.html')
+@app.route('/bucket/<bucket_name>')
+def bucket_details(bucket_name):
+    bucket_object = current_user.get_bucket_object(bucket_name)
+    return render_template('single_bucket.html', bucket=bucket_name, user=current_user, bucket_object = bucket_object)
+
+@app.route('/create_bucketitem', methods=['POST'])
+def create_bucketitem():
+    '''view to create user bucketsitems'''
+    bucket_name = request.form['bucket_name']
+    bucket_item_name = request.form['item']
+    description = request.form['description']
+    print(request.form)
+    # creating bucket object for the current user
+    global bucket_item
+    bucket_item = BucketItem(bucket_item_name, description)
+    print(bucket_item)
+    # adding bucket to user's bucketlist
+    global current_user
+    current_user.create_bucketlist_item(bucket_name, bucket_item)    
+    return redirect(url_for('bucketlist'))
+

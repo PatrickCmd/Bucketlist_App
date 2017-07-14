@@ -2,96 +2,89 @@
 {% block content %}
 
     <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <p style="padding: 20px;"></p>
-                <h2>Travel
-                    <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#goal"><i class="fa fa-plus"></i> ADD ITEM/GOAL</button>
-                </h2>
-                <hr>
-                <div>
-                  <!-- Nav tabs -->
-                  <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#active" aria-controls="active" role="tab" data-toggle="tab">Active/Achievements</a></li>
-                    <li role="presentation"><a href="#completed" aria-controls="completed" role="tab" data-toggle="tab">Completed</a></li>
+        <div class="col-md-8 col-md-offset-2">
+            <p style="padding: 20px;"></p>
+            <h2>{{ bucket }}
+                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#bucketitem"><i class="fa fa-plus"></i> ADD ITEM/GOAL</button>
+            </h2>
+            <hr>
 
-                  </ul>
-
-                  <!-- Tab panes -->
-                  <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="activee">
-
-                        <div class="col-md-12">
-                            <p style="padding: 10px;"></p>
-                                <!-- ========Accordions======= -->
-                            <div class="panel-group" id="accordion" role="role" aria-multiselectable="true">
-                              <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingOne">
-                                  <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                      Travel to Paris
-                                    </a>
-                                    <a href="#" class="pull-right">
+            {% if bucket_object.bucketitems|length == 0 %}
+                <div class="alert alert-warning">No Bucket Items Yet</div>
+            {% else %}
+            <div class="row">    
+               {% for bucketitem in bucket_object.bucketitems %}
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    {{ bucketitem.name }}
+                                    <a href="#del-{{ bucketitem.name }}" data-toggle="modal" class="pull-right">
                                         <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i> Delete
-                                     </a>
-                                  </h4>
-                                </div>
-                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                  <div class="panel-body">
-                                    I would like to travel to paris before 2017
-                                    <div class="">
-                                        <button type="button" class="btn btn-success btn-sm">
-                                          <i class="fa fa-edit fa-fw" aria-hidden="true"></i> Edit
-                                        </button>
-                                        <button type="button" class="btn btn-info btn-sm">
-                                          <i class="fa fa-check fa-fw" aria-hidden="true"></i> Mark as Done
-                                        </button>
-                                        <button type="button" class="btn btn-default btn-sm">
-                                          <i class="fa fa-share fa-fw" aria-hidden="true"></i> Share
-                                        </button>
-                                     </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingTwo">
-                                  <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                      Visit to Mecca
                                     </a>
-                                  </h4>
-                                </div>
-                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                  <div class="panel-body">
-                                    I have to pay prigrimage to Mecca by December
-                                    <div class="">
-                                        <button type="button" class="btn btn-success btn-sm">
-                                          <i class="fa fa-edit fa-fw" aria-hidden="true"></i> Edit
-                                        </button>
-                                        <button type="button" class="btn btn-info btn-sm">
-                                          <i class="fa fa-check fa-fw" aria-hidden="true"></i> Mark as Done
-                                        </button>
-                                        <button type="button" class="btn btn-default btn-sm">
-                                          <i class="fa fa-share fa-fw" aria-hidden="true"></i> Share
-                                        </button>
-                                     </div>
-                                  </div>
-                                </div>
-                              </div>
+                                </h3>
                             </div>
-                          </div>
-
+                            <div class="panel-body">
+                               
+                                {{ bucketitem.description }}
+                                <div class="">
+                                    <button type="button" data-toggle="modal" data-target="#edit-{{ bucketitem.name }}" class="btn btn-success btn-sm">
+                                    <i class="fa fa-edit fa-fw" aria-hidden="true"></i> Edit
+                                    </button>
+                                    <!--<button type="button" class="btn btn-info btn-sm">
+                                    <i class="fa fa-check fa-fw" aria-hidden="true"></i> Mark as Done
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-sm">
+                                    <i class="fa fa-share fa-fw" aria-hidden="true"></i> Share
+                                    </button>-->
+                                </div>
+                            </div>                       
+                        </div>
                     </div>
-
-                    <div role="tabpanel" class="tab-pane" id="completed">
-
-                    </div>
-
-                  </div>
-
-                </div>
+               {% endfor %}
             </div>
-        </div>
+            {% endif %}    
 
-        <hr>
+
+        </div>
+    </div>
+
+                  
+<!-- Add item Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog"  id="bucketitem" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">ADD BUCKET ITEM</h4>
+          </div>
+          <form action="{{ url_for('create_bucketitem') }}" method="post" class="form-horizontal" id="buckets">
+              <div class="modal-body">
+                <div class="form-group">
+                    <label for="item" class="col-sm-2 control-label">Bucket Item</label>
+                    <div class="col-sm-10">
+                    <input type="hidden" class="form-control" name="bucket_name" id="name" Value="{{ bucket }}">
+                    <input type="text" class="form-control" name="item" id="item" placeholder="Bucket item Title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                    <textarea id="description" name="description" class="form-control"></textarea>
+                    </div>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary"  value="Save">
+              </div>
+          </form>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 {% endblock %}
+
+
+

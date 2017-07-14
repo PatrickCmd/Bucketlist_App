@@ -18,7 +18,7 @@
                             <ul class="list-group">
                                 {% for bucket in user.buckets %}
                                     <li class="list-group-item">
-                                        <a href="#{{ bucket.name }}" data-toggle="modal">{{ bucket.name }}</a>
+                                        <a href="/bucket/{{ bucket.name }}" data-toggle="modal">{{ bucket.name }}</a>
                                         <a href="#del-{{ bucket.name }}" data-toggle="modal" class="pull-right"><i class="fa fa-trash-o"></i> Delete</a>
                                         <a href="#{{ bucket.name }}" data-toggle="modal" class="pull-right"><i class="fa fa-pencil-square"></i> Edit&nbsp;&nbsp;|&nbsp;&nbsp;</a>
                                     </li>
